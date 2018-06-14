@@ -26,6 +26,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'ls -l'
+                sh 'export TERM=xterm; img build -t testimg .'
                 sh '''#!/bin/bash
                     img build -t testimg .
                     '''

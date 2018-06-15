@@ -3,7 +3,7 @@
  */
 
 podTemplate(label: 'jenkins-slave', containers: [
-      containerTemplate(name: 'builderslave', image: 'crocha/jenkins-slave:3.3', ttyEnabled: true, command: 'cat')
+      containerTemplate(name: 'builderslave', image: 'crocha/jenkins-slave:3.4', ttyEnabled: true, command: 'cat')
 
     ],
     volumes: [
@@ -17,7 +17,10 @@ podTemplate(label: 'jenkins-slave', containers: [
             sh 'ls -l /var/run'
             sh 'docker -v'
             sh 'git clone https://github.com/carlosrochap/jenkins-sample.git .'
-            sh 'docker build -t testimg .' 
+            sh 'docker build -t testimg .'
+            sh 'docker login -u carlosrocha -p Test123'            
+            sh 'docker docker tag testimg carlosrocha/sampleimgbuild'
+            sh 'docker push carlosrocha/sampleimgbuild'
         }
         
     }

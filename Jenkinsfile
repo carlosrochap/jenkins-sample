@@ -11,7 +11,7 @@ pipeline {
                 spec: 
                     containers: 
                       - name: jenkins-slave
-                        image: crocha/jenkins-slave:1.1
+                        image: crocha/jenkins-slave:2.0
                         command: ['cat'] 
                         tty: true
                         resources: 

@@ -16,7 +16,8 @@ podTemplate(label: 'jenkins-slave', containers: [
         container('builderslave'){
             sh 'ls -l /var/run'
             sh 'docker -v'
-            sh 'docker build -t testimg .'
+            sh 'git clone git@github.com:carlosrochap/jenkins-sample.git .'
+            sh 'docker build -t testimg .' 
         }
         
     }

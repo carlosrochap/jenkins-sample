@@ -1,23 +1,38 @@
-/**
- * This pipeline describes a multi container job, running Maven and Golang builds
- */
+pipeline {
+    agent {
+        kubernetes {
+            label 'mypod'
+            defaultContainer 'jenkins-slave'
+            yaml """
+                apiVersion: v1 
+                kind: Pod 
+                metadata: 
+                    name: dood 
+                spec: 
+                    containers: 
+                      - name: jenkins-slave
+                        image: crocha/jenkins-slave:3.0
+                        command: ['cat'] 
+                        tty: true
+                        resources: 
+                            requests: 
+                                cpu: 10m 
+                                memory: 256Mi 
+            """
+        }
 
-podTemplate(label: 'jenkins-slave', containers: [
-      containerTemplate(name: 'builderslave', image: 'crocha/jenkins-slave:2.0', ttyEnabled: true, command: 'cat')
-
-    ],
-    volumes: [
-        hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
-    ]
-  ) {
-
-  node('jenkins-slave') {
-    stage('Test stuff') {
-        sh 'ls -l /var/run'
-        sh 'docker -v'
     }
-
-    
-
-  }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'ls -l'
+                sh 'docker -v'
+                sh 'docker build -t testimg .'
+            }
+        }
+    }
 }
+
+
+
+

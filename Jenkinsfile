@@ -13,7 +13,7 @@ pipeline {
                       - name: jenkins-slave
                         image: crocha/jenkins-slave:2.0
                         command: ['cat'] 
-                        
+                        tty: true
                         resources: 
                             requests: 
                                 cpu: 10m 

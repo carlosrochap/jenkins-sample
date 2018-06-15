@@ -11,11 +11,11 @@ podTemplate(label: 'jenkins-slave', containers: [
     ]
   ) {
 
-
+  stage('sss Step') {
   sh "ls -l"
-  
+  }
   node('jenkins-slave') {
-    stage('Build Step') {
+    
         
         
         

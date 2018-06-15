@@ -19,7 +19,7 @@ podTemplate(label: 'jenkins-slave', containers: [
             sh 'git clone https://github.com/carlosrochap/jenkins-sample.git .'
             sh 'docker build -t testimg .'
             sh 'docker login -u carlosrocha -p Test123'            
-            sh 'docker docker tag testimg carlosrocha/sampleimgbuild'
+            sh 'docker tag testimg carlosrocha/sampleimgbuild'
             sh 'docker push carlosrocha/sampleimgbuild'
         }
         

@@ -11,9 +11,9 @@ podTemplate(label: 'jenkins-slave', containers: [
     ]
   ) {
 
-  node('master') {
-    sh "kubectl cp -c builderslave ./ ${NODE_NAME}:/var/build"
-  }
+
+  sh "ls -l"
+  
   node('jenkins-slave') {
     stage('Build Step') {
         

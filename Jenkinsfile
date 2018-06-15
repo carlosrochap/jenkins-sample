@@ -13,6 +13,9 @@ podTemplate(label: 'jenkins-slave', containers: [
 
   node('jenkins-slave') {
     stage('Test stuff') {
+        echo env.BUILD_NUMBER
+        echo "${env.getEnvironment()}"
+        
         container('builderslave'){
             sh 'ls -l /var/run'
             sh 'docker -v'
@@ -22,6 +25,8 @@ podTemplate(label: 'jenkins-slave', containers: [
             sh 'docker tag testimg carlosrocha/sampleimgbuild'
             sh 'docker push carlosrocha/sampleimgbuild'
         }
+        
+        sh 'kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080'
         
     }
 

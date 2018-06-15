@@ -12,9 +12,7 @@ podTemplate(label: 'jenkins-slave', containers: [
   ) {
 
   node('jenkins-slave') {
-    stage('Test stuff') {
-        echo env.BUILD_NUMBER
-        echo "${env.getEnvironment()}"
+    stage('Build Step') {
         
         sh "kubectl cp ./ ${NODE_NAME}:/var/build builderslave"
         

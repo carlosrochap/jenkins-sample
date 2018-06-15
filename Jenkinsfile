@@ -15,19 +15,19 @@ podTemplate(label: 'jenkins-slave', containers: [
     stage('Test stuff') {
         echo env.BUILD_NUMBER
         echo "${env.getEnvironment()}"
-        echo "${NODE_NAME}"
+        
+        sh "kubectl cp ./ ${NODE_NAME}:/var/build builderslave"
+        
         
         container('builderslave'){
-            sh 'ls -l /var/run'
+            sh 'cd /var/build'
             sh 'docker -v'
-            sh 'git clone https://github.com/carlosrochap/jenkins-sample.git .'
+          
             sh 'docker build -t testimg .'
             sh 'docker login -u carlosrocha -p Test123'            
             sh 'docker tag testimg carlosrocha/sampleimgbuild'
             sh 'docker push carlosrocha/sampleimgbuild'
         }
-        
-        
         
     }
 

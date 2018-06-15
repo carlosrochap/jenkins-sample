@@ -3,7 +3,7 @@
  */
 
 podTemplate(label: 'jenkins-slave', containers: [
-      containerTemplate(name: 'builderslave', image: 'crocha/jenkins-slave:3.0', ttyEnabled: true, command: 'cat')
+      containerTemplate(name: 'builderslave', image: 'crocha/jenkins-slave:3.1', ttyEnabled: true, command: 'cat')
 
     ],
     volumes: [

@@ -13,9 +13,12 @@ podTemplate(label: 'jenkins-slave', containers: [
 
   node('jenkins-slave') {
     stage('Test stuff') {
-        sh 'ls -l /var/run'
-        sh 'docker -v'
-        sh 'docker build -t testimg .'
+        container('builderslave'){
+            sh 'ls -l /var/run'
+            sh 'docker -v'
+            sh 'docker build -t testimg .'
+        }
+        
     }
 
     

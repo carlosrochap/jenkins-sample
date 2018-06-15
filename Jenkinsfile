@@ -18,6 +18,10 @@ pipeline {
                             requests: 
                                 cpu: 10m 
                                 memory: 256Mi 
+            
+            volumes
+                - hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
+            
             """
         }
 
@@ -25,7 +29,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'ls -l'
+                sh 'ls -l /var/run'
                 sh 'img build -t testimg .'
                 sh '''#!/bin/bash
                     img build -t testimg .

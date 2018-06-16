@@ -21,10 +21,7 @@ podTemplate(label: label, containers: [
             }
             
             stage('Build Image'){
-                sh 'cd ./build'
-                sh 'docker -v'
-                sh 'docker build -t testimg .'
-                
+                sh 'cd ./build; docker build -t testimg .'
             }
             
             stage('Push Image'){

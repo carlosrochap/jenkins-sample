@@ -26,8 +26,8 @@ podTemplate(label: label, containers: [
             
             stage('Push Image'){
                 sh 'docker login -u carlosrocha -p Test123'            
-                sh 'docker tag testimg #{image_name}'
-                sh 'docker push #{image_name}'
+                sh 'docker tag testimg $image_name'
+                sh 'docker push $image_name'
             }
             
             

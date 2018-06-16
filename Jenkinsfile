@@ -2,7 +2,7 @@
  * This pipeline describes a multi container job, running Maven and Golang builds
  */
 def label = "jenkins-slave-${UUID.randomUUID().toString()}"
-def image_name = 'carlosrocha/test_image_sample'
+def image_name = "carlosrocha/test_image_sample"
 podTemplate(label: label, containers: [
       containerTemplate(name: 'builderslave', image: 'crocha/jenkins-slave:3.4', ttyEnabled: true, command: 'cat')
 
@@ -26,8 +26,8 @@ podTemplate(label: label, containers: [
             
             stage('Push Image'){
                 sh 'docker login -u carlosrocha -p Test123'            
-                sh 'docker tag testimg $image_name'
-                sh 'docker push $image_name'
+                sh "docker tag testimg $image_name"
+                sh "docker push $image_name"
             }
             
             

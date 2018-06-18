@@ -1,8 +1,10 @@
 /**
  * This pipeline describes a multi container job, running Maven and Golang builds
  */
-def label = "jenkins-slave-${UUID.randomUUID().toString()}"
+
+ def label = "jenkins-slave-${UUID.randomUUID().toString()}"
 def image_name = "carlosrocha/test_image_sample"
+
 podTemplate(label: label, containers: [
       containerTemplate(name: 'builderslave', image: 'crocha/jenkins-slave:3.4', ttyEnabled: true, command: 'cat')
 
